@@ -9,7 +9,7 @@ let restaurants = [];
 
 // Wait for the page to load
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('Tutorial 6: Async data loading ready!');
+    console.log('Tutorial 5: Async data loading ready!');
     
     // Get UI elements
     const loadButton = document.querySelector('#load-data-button');
