@@ -8,9 +8,18 @@
 let restaurants = [];
 
 // Wait for the page to load
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
     console.log('Tutorial 5: Async data loading ready!');
-    
+    try {
+    const response = await fetch('./restaurants.json'); 
+    const data = await response.json();
+
+    restaurants.push(...data);
+
+  } catch (error) {
+    console.error("Failed to fetch restaurants", error);
+  }
+    console.log(restaurants)
     // Get UI elements
     const loadButton = document.querySelector('#load-data-button');
     const statusDisplay = document.querySelector('#loading-status');
@@ -28,8 +37,14 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // This is the key new skill - loading data asynchronously
     loadButton.addEventListener('click', async function() {
-        
-        // Step 1: Show loading state
+    updateStatus('loading', 'Loading data...');
+    loadButton.disabled = true;
+    displayButton.disabled = true;
+    filterButton.disabled = true;
+    mapButton.disabled = true;
+    errorButton.disabled = true;
+    
+                // Step 1: Show loading state
         // Hint: Change statusDisplay classes and statusMessage text
         // Hint: Disable the load button while loading
         
@@ -37,9 +52,12 @@ document.addEventListener('DOMContentLoaded', function() {
         
         
         try {
+            const response = await fetch('restaurants.json');
+
             // Step 2: Use fetch() to load data
             // Hint: const response = await fetch('restaurants.json');
             // Hint: Check if response.ok before continuing
+            
             
             // Step 3: Convert response to JSON
             // Hint: const data = await response.json();
